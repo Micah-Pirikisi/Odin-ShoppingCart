@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useCart } from "../hooks/useCart";
+import { useCart } from "./useCart";
 
 export default function Navbar() {
   const { totalItems } = useCart();
