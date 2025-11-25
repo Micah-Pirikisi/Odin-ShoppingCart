@@ -1,0 +1,372 @@
+/* Design tokens */
+:root {
+  --bg: #0f172a; /* deep navy */
+  --card-bg: #0b1220; /* darker card */
+  --muted: #94a3b8;
+  --text: #e6eef8; /* off-white */
+  --accent: #06b6d4; /* cyan/teal */
+  --accent-contrast: #042028;
+  --success: #16a34a;
+
+  --radius: 10px;
+  --container-width: 1200px;
+  --gap: 1rem;
+}
+
+/* Reset / Base */
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+html {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial;
+}
+body {
+  margin: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(6, 11, 22, 1) 0%,
+    rgba(10, 15, 26, 1) 100%
+  );
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.45;
+  font-size: 16px;
+}
+
+/* Container */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Header / Navbar */
+header.navbar {
+  background: rgba(7, 10, 15, 0.6);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  position: relative;
+}
+
+header.navbar .navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+}
+
+.navbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.navbar a {
+  color: var(--text);
+  text-decoration: none;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  transition: background-color 150ms ease, transform 120ms ease;
+}
+
+.navbar a:hover,
+.navbar a:focus {
+  background: rgba(255, 255, 255, 0.03);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.navbar a.cart-link {
+  background: linear-gradient(
+    90deg,
+    rgba(6, 182, 212, 0.12),
+    rgba(16, 185, 129, 0.06)
+  );
+  border: 1px solid rgba(6, 182, 212, 0.12);
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.navbar .cart-count {
+  min-width: 20px;
+  height: 20px;
+  display: inline-grid;
+  place-items: center;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0 0.45rem;
+  margin-left: 4px;
+  font-size: 0.85rem;
+}
+
+.cart-link svg {
+  width: 18px;
+  height: 18px;
+  color: var(--text);
+}
+.cart-link .cart-text {
+  font-weight: 600;
+}
+
+.cart-bounce {
+  animation: cartPop 420ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+@keyframes cartPop {
+  0% {
+    transform: none;
+  }
+  35% {
+    transform: translateY(-6px) scale(1.03);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+/* hamburger */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  padding: 0.25rem;
+}
+
+nav#main-nav {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+nav#main-nav.open {
+  display: flex;
+}
+
+@media (max-width: 640px) {
+  .hamburger {
+    display: inline-flex;
+  }
+  nav#main-nav {
+    display: none;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 0.5rem;
+    border-radius: 8px;
+    position: absolute;
+    right: 10px;
+    top: 62px;
+    align-items: stretch;
+  }
+  nav#main-nav.open {
+    display: flex;
+  }
+  .cart-text {
+    display: none;
+  }
+}
+
+/* Main layout */
+main.page {
+  padding: 2rem 0;
+}
+
+/* Shop grid */
+.shop {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 640px) {
+  .shop {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 960px) {
+  .shop {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1280px) {
+  .shop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Card */
+.card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  border-radius: var(--radius);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.5),
+    0 1px 0 rgba(255, 255, 255, 0.02) inset;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 30px rgba(2, 6, 23, 0.7);
+}
+.card img {
+  max-width: 100%;
+  height: 160px;
+  object-fit: contain;
+  align-self: center;
+}
+.card h3 {
+  font-size: 1rem;
+  margin: 0;
+  color: var(--text);
+  min-height: 2.6rem;
+}
+
+.card .price {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.card .qty-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.card .qty-controls button {
+  min-width: 2.2rem;
+}
+
+/* Buttons */
+button {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 0.45rem 0.75rem;
+  color: var(--accent-contrast);
+  background: linear-gradient(180deg, var(--accent), #0bb8c9);
+  border: none;
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+button:hover {
+  transform: translateY(-2px);
+}
+button:active {
+  transform: translateY(0);
+}
+button.secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+input[type="number"] {
+  width: 54px;
+  padding: 0.35rem 0.45rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Cart page */
+.cart-list {
+  display: grid;
+  gap: 1rem;
+}
+.cart-row {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Headings */
+h1,
+h2 {
+  margin: 0 0 1rem 0;
+  color: var(--text);
+}
+
+/* Utility */
+.text-muted {
+  color: var(--muted);
+}
+
+/* Focus states */
+:focus-visible {
+  outline: 2px solid rgba(6, 182, 212, 0.2);
+  outline-offset: 2px;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: rgba(2, 6, 23, 0.8);
+  color: var(--text);
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.5);
+  font-weight: 600;
+}
+
+/* fly-to-cart image clone (handled by inline styles) */
+
+/* small icon button styling */
+.card .qty-controls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+}
+.card .qty-controls svg {
+  color: var(--text);
+}
+
+/* Add to cart button micro interaction */
+button:active {
+  transform: scale(0.98);
+}
+button.add-success {
+  animation: pop 420ms ease;
+}
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* small screen fixes */
+@media (max-width: 420px) {
+  .container {
+    padding: 1rem;
+  }
+  .card img {
+    height: 120px;
+  }
+}

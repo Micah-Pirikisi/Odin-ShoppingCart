@@ -4,7 +4,7 @@ import { CartContext } from "../useCart";
 import { vi } from "vitest";
 
 // Mock product
-const product = { id: 1, title: "Hat", image: "test.png" };
+const product = { id: 1, title: "Hat", image: "test.png", price: 12.5 };
 
 test("adds item to cart when clicking Add to Cart", () => {
   const addItem = vi.fn();
@@ -20,6 +20,10 @@ test("adds item to cart when clicking Add to Cart", () => {
       <ProductCard product={product} />
     </CartContext.Provider>
   );
+
+  // Only one price should render
+  const prices = screen.queryAllByText(/\$12.50/);
+  expect(prices.length).toBe(1);
 
   fireEvent.click(screen.getByText(/add to cart/i));
 
