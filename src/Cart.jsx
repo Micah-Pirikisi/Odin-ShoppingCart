@@ -1,3 +1,4 @@
+import React from "react";
 import { useCart } from "./useCart";
 
 export default function Cart() {
